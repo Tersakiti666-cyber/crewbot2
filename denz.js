@@ -2983,25 +2983,16 @@ case 'tiktokmusic':
                     get_audio = await getBuffer(`http://api.lolhuman.xyz/api/tiktokmusic?apikey=${lol}&url=${ini_link}`)
                     denz.sendMessage(from, get_audio, audio, { mimetype: Mimetype.mp4Audio, quoted: ftoko})
                     break
-case 'igpost': 
-                 if (args.length < 1) return reply('Urlnya mana sayang?')
-				if (!isUrl(args[0]) && !args[0].includes('www.instagram.com')) return reply(mess.error.lv)
-					 ige = body.slice(8)
-                     anu = await fetchJson(`http://lolhuman.herokuapp.com/api/instagram?apikey=${apikey}&url=${args[0]}`, {method: 'get'})
-					if (anu.error) return reply(anu.error)
-					buffer = await getBuffer(anu.result)
-                    denz.sendMessage(from, buffer, image, { quoted: fdoc, contextInfo: {"forwardingScore": 999, "isForwarded": true}, caption: 'Nihh onii chan'})
-				    break
-case 'igvideo':
-if (args.length < 1) return reply('Urlnya mana sayang?')
-				if (!isUrl(args[0]) && !args[0].includes('www.instagram.com')) return reply(mess.error.lv)
-					 ige = body.slice(9)
-                     anu = await fetchJson(`http://lolhuman.herokuapp.com/api/instagram?apikey=${apikey}&url=${args[0]}`, {method: 'get'})
-					if (anu.error) return reply(anu.error)
-					buffer = await getBuffer(anu.result)
-                    denz.sendMessage(from, buffer, video, { quoted: fvid, contextInfo: {"forwardingScore": 999, "isForwarded": true}, caption: 'Nihh onii chan'})
-				    break
-                    
+                    case 'telesticker':
+                    if (args.length == 0) return reply(`Contoh: ${prefix + command} https://t.me/addstickers/LINE_Menhera_chan_ENG`)
+                    ini_url = args[0]
+                    ini_url = await fetchJson(`http://api.lolhuman.xyz/api/telestick?apikey=${lolhuman}&url=${ini_url}`)
+                    ini_sticker = ini_url.result.sticker
+                    for (sticker_ in ini_sticker) {
+                        ini_buffer = await getBuffer(ini_sticker[sticker_])
+                        denz.sendMessage(from, ini_buffer, sticker)
+                     }
+                    break
                             case 'video':
                             if (args.length === 0) return reply(`Kirim perintah *${prefix}video* _Judul video yang akan dicari_`)
                             const playi = await axios.get(`https://bx-hunter.herokuapp.com/api/yt/search?query=${body.slice(6)}&apikey=ikygans`)
@@ -4513,11 +4504,71 @@ case 'admin':
                     denz.sendMessage(from, ga, text, {quoted: ftoko})
 				  denz.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', quoted: ftoko, ptt:true})
 				break
+				case 'igpost': 
+                 if (args.length < 1) return reply('Urlnya mana sayang?')
+				if (!isUrl(args[0]) && !args[0].includes('www.instagram.com')) return reply(mess.error.lv)
+					 ige = body.slice(8)
+                     anu = await fetchJson(`http://lolhuman.herokuapp.com/api/instagram?apikey=${apikey}&url=${args[0]}`, {method: 'get'})
+					if (anu.error) return reply(anu.error)
+					buffer = await getBuffer(anu.result)
+                    denz.sendMessage(from, buffer, image, { quoted: fdoc, contextInfo: {"forwardingScore": 999, "isForwarded": true}, caption: 'Nihh onii chan'})
+				    break
+case 'igvideo':
+if (args.length < 1) return reply('Urlnya mana sayang?')
+				if (!isUrl(args[0]) && !args[0].includes('www.instagram.com')) return reply(mess.error.lv)
+					 ige = body.slice(9)
+                     anu = await fetchJson(`http://lolhuman.herokuapp.com/api/instagram?apikey=${apikey}&url=${args[0]}`, {method: 'get'})
+					if (anu.error) return reply(anu.error)
+					buffer = await getBuffer(anu.result)
+                    denz.sendMessage(from, buffer, video, { quoted: fvid, contextInfo: {"forwardingScore": 999, "isForwarded": true}, caption: 'Nihh onii chan'})
+				    break
+				case 'igdl':
+                    if (args.length == 0) return reply(`Example: ${prefix + command} https://www.instagram.com/p/CJ8XKFmJ4al/?igshid=1acpcqo44kgkn`)
+                    ini_url = args[0]
+                    ini_url = await fetchJson(`http://api.lolhuman.xyz/api/instagram?apikey=${apikey}&url=${ini_url}`)
+                    ini_url = ini_url.result
+                    ini_type = image
+                    if (ini_url.includes(".mp4")) ini_type = video
+                    ini_buffer = await getBuffer(ini_url)
+                    denz.sendMessage(from, ini_buffer, ini_type, { quoted: fvid, contextInfo: {"forwardingScore": 999, "isForwarded": true}, quoted: sft })
+break
+
+case 'ig':
+ pe = args.join('')
+ anu = await fetchJson(`https://videfikri.com/api/igdl/?url=${pe}`)
+ buffer = await getBuffer(`${anu.result.video}`)
+ denz.sendMessage(from, buffer, video, { quoted: sft, contextInfo: {"forwardingScore": 999, "isForwarded": true}, caption: 'Nihh onii chan'})
+ break
+
+case 'igtv':
+ pe = args.join('')
+ anu = await fetchJson(`https://videfikri.com/api/igtv/?url=${pe}`)
+ buffer = await getBuffer(`${anu.result.video_url}`)
+ denz.sendMessage(from, buffer, video, { quoted: fvid, contextInfo: {"forwardingScore": 999, "isForwarded": true}, caption: 'Nihh onii chan'})
+ break
+case 'igpost': 
+                 if (args.length < 1) return reply('Urlnya mana sayang?')
+				if (!isUrl(args[0]) && !args[0].includes('www.instagram.com')) return reply(mess.error.lv)
+					 ige = body.slice(8)
+                     anu = await fetchJson(`http://lolhuman.herokuapp.com/api/instagram?apikey=${apikey}&url=${args[0]}`, {method: 'get'})
+					if (anu.error) return reply(anu.error)
+					buffer = await getBuffer(anu.result)
+                    denz.sendMessage(from, buffer, image, { quoted: fvid, contextInfo: {"forwardingScore": 999, "isForwarded": true}, caption: 'Nihh onii chan'})
+				    break
+case 'igvideo':
+if (args.length < 1) return reply('Urlnya mana sayang?')
+				if (!isUrl(args[0]) && !args[0].includes('www.instagram.com')) return reply(mess.error.lv)
+					 ige = body.slice(9)
+                     anu = await fetchJson(`http://lolhuman.herokuapp.com/api/instagram?apikey=${apikey}&url=${args[0]}`, {method: 'get'})
+					if (anu.error) return reply(anu.error)
+					buffer = await getBuffer(anu.result)
+                    denz.sendMessage(from, buffer, video, { quoted: fvid, contextInfo: {"forwardingScore": 999, "isForwarded": true}, caption: 'Nihh onii chan'})
+				    break
 					case 'igd':
             if (args.length < 1) return reply('Link nya mana?')
             anu = await fetchJson(`https://videfikri.com/api/igvideo/?url=${args[0]}`, {method: 'get'})          
             buffer = await getBuffer(anu.result.video)
-            denz.sendMessage(from, buffer,video, { mimetype: 'video/mp4', filename: `${anu.result.fullname}.mp4`,quoted:mek})
+            denz.sendMessage(from, buffer,video, { mimetype: 'video/mp4', filename: `${anu.result.fullname}.mp4`,quoted: fvid})
             break
 case 'ig':
  pe = args.join(' ')
